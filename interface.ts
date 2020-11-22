@@ -1,3 +1,11 @@
+interface addFunc {
+    (num1: number, num2: number): number;
+}
+
+const addFunc:addFunc = (n1: number, n2:number): number => {
+    return n1 + n2
+}
+
 interface Human {
     name: string;
     age: number;
@@ -18,3 +26,5 @@ class Developer implements Human {
         console.log('test')
     }
 }
+
+const user: Human = new Developer('Quill', 38)
