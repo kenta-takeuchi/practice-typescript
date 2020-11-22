@@ -1,9 +1,17 @@
 "use strict";
-var Person = /** @class */ (function () {
-    function Person(initName) {
+class Person {
+    constructor(initName, initAge) {
         this.name = initName;
+        this.age = initAge;
     }
-    return Person;
-}());
-var quill = new Person('Quill');
+    incrementAge() {
+        this.age += 1;
+    }
+    greeting() {
+        console.log(`Hello My name is ${this.name}. I am ${this.age} years old`);
+    }
+}
+const quill = new Person('Quill', 30);
+quill.greeting();
+quill.incrementAge();
 console.log(quill);
