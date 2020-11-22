@@ -24,3 +24,7 @@ stringLightDatabase.add('banana')
 stringLightDatabase.add('grape')
 stringLightDatabase.remove('banana')
 console.log(stringLightDatabase.get())
+
+type mappedType = {
+    [P in 'tomato' | 'pumpkin']: string
+}
