@@ -25,6 +25,11 @@ stringLightDatabase.add('grape')
 stringLightDatabase.remove('banana')
 console.log(stringLightDatabase.get())
 
-type mappedType = {
-    [P in 'tomato' | 'pumpkin']: string
+interface Vegetables {
+    tomato: string;
+    pumpkin: string;
+}
+
+type mappedType<T> = {
+    [P in keyof Vegetables]?: string
 }
