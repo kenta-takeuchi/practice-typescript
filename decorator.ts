@@ -6,23 +6,35 @@ function Logging(message: string) {
 }
 
 function Component(template: string, selector: string) {
-    return function<T extends { new(...args: any[]): {name: string} }> (constructor: T) {
-        const mountedElement = document.querySelector(selector);
-        const instance = new constructor();
-        if (mountedElement) {
-            mountedElement.innerHTML = template;
-            mountedElement.querySelector('h1')!.textContent = instance.name;
+    return function <T extends { new(...args: any[]): { name: string } }>(constructor: T) {
+        return class extends constructor {
+            constructor(...args: any[]) {
+                super(...args);
+                const mountedElement = document.querySelector(selector);
+                const instance = new constructor();
+                if (mountedElement) {
+                    mountedElement.innerHTML = template;
+                    mountedElement.querySelector('h1')!.textContent = instance.name;
+                }
+            }
         }
     }
+}
+
+function PropertyLogging(target: any, propertyKey: string) {
+    console.log('propertyLogging');
+    console.log(target);
+    console.log(propertyKey);
 }
 
 @Component('<h1>{{ name }}</h1>', '#app')
 @Logging('Logging User')
 class User {
-    name = 'Quill';
-    constructor() {
+    @PropertyLogging
+    name = 'Quilla';
+    constructor(public age: number) {
         console.log('User was created')
     }
 }
 
-const user1 = new User()
+const user1 = new User(32)
